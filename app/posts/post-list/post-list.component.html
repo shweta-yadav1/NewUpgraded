@@ -1,0 +1,23 @@
+<!-- <mat-spinner *ngIf = "isLoading"></mat-spinner> -->
+<!-- <mat-accordion multi = "true" *ngIf ="newPost.length && !
+isLoading else noPosts"> -->
+<mat-accordion multi = "true" *ngIf ="newPost.length  else noPosts">
+  <mat-expansion-panel *ngFor = "let i of newPost">
+    <mat-expansion-panel-header>
+      {{i.title}}
+    </mat-expansion-panel-header>
+    <p>{{i.content}}</p>
+    <mat-action-row>
+      <a mat-button color = "primary" [routerLink]="['/edit',i.id]" >EDIT</a>
+      <button mat-button color ="warn" (click) ="deleteP(i.id)" >DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+<mat-paginator [length] = "10" [pageSize]="2" [pageSizeOptions]="[1,2,3]"  (page)="onpage($event)"></mat-paginator>
+
+
+<ng-template #noPosts>
+  <p>No posts added yet !</p>
+</ng-template>
